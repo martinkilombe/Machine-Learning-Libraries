@@ -71,5 +71,91 @@ def describe_vehicles(vehicle):
 my_vehicle = Car("BMW","Black")
 my_electric_vehicle =ElectricCar("nISSAN", "Green")
 
-describe_vehicle(my_vehicle)
-describe_vehicle(my_electric_vehicle)
+
+
+
+
+
+
+
+
+"""Encapsulation:
+Encapsulation refers to the bundling of data (attributes) and methods (functions) within a class, and 
+controlling access to them. It helps in hiding the internal details of an object and provides a way to interact with the object through well-defined interfaces.
+ In Python, encapsulation can be achieved by using access modifiers."""
+
+class BankAccount:
+    def __init__(self,account_number,balance):
+        self._account_number = account_number #protected attribute
+        self.__balance = balance #Hidden attribute
+
+    def deposit(self,amount):
+        self.__balance+=amount
+    
+    def withdraw(self,amount):
+        if amount <=self.__balance:
+            self.__balance-=amount
+        else:
+            print("Insufficient balance")
+
+    def get_balance(self):
+        return self.__balance
+
+"""In this example, the _account_number attribute is protected (conventionally denoted by a single leading underscore), 
+which indicates that it should not be accessed directly from outside the class. 
+The __balance attribute is private (denoted by double leading underscores), making it even more restricted."""
+
+
+
+"""Abstraction:
+Abstraction focuses on providing essential information to the outside world while hiding the internal implementation details. 
+It allows you to define interfaces and abstract classes that can be inherited and implemented by other classes.
+python
+"""
+from abc import ABC , abstractmethod
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+class Rectangle(Shape):
+    def __init__(self,length, width):
+        self.length = length
+        self.width = width
+    def area(self):
+        return self.length*self.width
+    
+class Circle(Shape):
+    def __init__(self,radius):
+        self.radius = radius
+    def area(self):
+        return 3.142*self.radius**2
+
+"""In this example, the Shape class is an abstract class with an abstract method area(). 
+It cannot be instantiated directly but serves as a blueprint for other classes like Rectangle and Circle. 
+These subclasses inherit from Shape and provide their own implementation of the area() method."""
+
+
+
+"""Method Overriding:
+Method overriding occurs when a subclass provides its own implementation of a method that is already defined in its superclass. 
+It allows you to customize the behavior of inherited methods."""
+class Animal:
+    def make_sound(self):
+        print("The animal makes a sound")
+
+class Cat(Animal):
+    def make_sound(self):
+        print("The cat meows.")
+
+class Dog(Animal):
+    def make_sound(self):
+        print("The dog barks.")
+
+my_animal = Animal()
+my_cat = Cat()
+my_dog = Dog()
+
+my_animal.make_sound()  # Output: The animal makes a sound.
+my_cat.make_sound()  # Output: The cat meows.
+my_dog.make_sound()  # Output: The dog barks.
